@@ -5,7 +5,7 @@
             [ring.util.response :refer [header]])
   (:use [hiccup.core]))
 
-(defn scene [title [location position scale] spin]
+(defn scene [title [location position scale]]
 	(html
 		[:head
 			[:title title]
@@ -16,18 +16,17 @@
 			[:a-scene {:auto-enter-vr ""}
                                 [:a-image {:src "img/home.png" :scale "2 2 2" :position "5 5 5" :redirect-home-on-click ""}]
 				[:a-collada-model {:src location :position position :scale scale}
-                                 (if spin
-                                  [:a-animation {:attribute "rotation" :dur "10000" :fill "forwards" :to "0 360 0" :repeat "indefinite"}])]
+                                  [:a-animation {:attribute "rotation" :dur "10000" :fill "forwards" :to "0 360 0" :repeat "indefinite"}]]
                                 [:a-camera
                                  [:a-cursor]]
 				[:a-sky {:src "img/background.jpg"}]]]))
 
 (def scenes
-  {:grand-mosque (scene "Grand Mosque" ["models/grand-mosque.dae" "0 -100 0" "1 1 1"] false)
-   :burj-khalifa (scene "Burj Khalifa" ["models/burj-khalifa.dae" "-5 1 0" "1 1 1"] true)
-   :emirates-palace (scene "Emirates Palace" ["models/emirates-palace.dae" "0 0 0"] true)
-   :ferrari-world (scene "Ferarri World" ["models/ferarri-world.dae" "-500 -600 -500" "0.25 0.25 0.25"] true)
-   :burj-al-arab (scene "Burj Al Arab" ["models/burj-al-arab.dae" "-500 -500 -500" "1 1 1"] true)})
+  {:grand-mosque (scene "Grand Mosque" ["models/grand-mosque.dae" "0 -100 0" "1 1 1"])
+   :burj-khalifa (scene "Burj Khalifa" ["models/burj-khalifa.dae" "-5 1 0" "1 1 1"])
+   :emirates-palace (scene "Emirates Palace" ["models/emirates-palace.dae" "0 0 0"])
+   :ferrari-world (scene "Ferarri World" ["models/ferarri-world.dae" "-500 -600 -500" "0.25 0.25 0.25"])
+   :burj-al-arab (scene "Burj Al Arab" ["models/burj-al-arab.dae" "-500 -500 -500" "1 1 1"])})
 
 (def index
   (html
